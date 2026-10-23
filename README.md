@@ -32,5 +32,4 @@ The project started with an AI-generated prototype using Lovable. The website wa
 3. Run the application: `python app.py`
 4. Open `http://127.0.0.1:5000` in a browser.
 
-## Project Notes
-The application is a local educational prototype. It uses sample cybersecurity news articles and is not intended for production deployment.
+
