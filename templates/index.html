@@ -92,7 +92,7 @@
                placeholder="Search cybersecurity news..."
                aria-label="Search news">
 
-        <div class="news-container">
+        <div class="news-container" id="news-container"></div>
             {% for article in articles %}
             <div class="news-card"
                  data-category="{{ article.category }}">
