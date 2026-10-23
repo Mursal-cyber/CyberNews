@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberNews</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b1730;
+            color: white;
+        }
+        header {
+            background: #102447;
+            padding: 25px;
+            text-align: center;
+        }
+        nav {
+            background: #18365b;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            color: white;
+            margin: 8px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        nav a.active {
+            color: #56c9ff;
+            font-weight: bold;
+        }
+        main {
+            padding: 30px;
+        }
+        #search {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: none;
+            box-sizing: border-box;
+        }
+        .news-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .news-card {
+            background: #19365b;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .news-card h3 a {
+            color: #56c9ff;
+            text-decoration: none;
+        }
+        .news-card p {
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #102447;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CyberNews</h1>
+        <p>Your Cybersecurity News Dashboard</p>
+    </header>
+
+    <nav>
+        <a href="/" data-category="all" class="active">Home</a>
+        <a href="#" data-category="Ransomware">Ransomware</a>
+        <a href="#" data-category="Data Breaches">Data Breaches</a>
+        <a href="#" data-category="Vulnerabilities">Vulnerabilities</a>
+        <a href="#" data-category="Phishing">Phishing</a>
+        <a href="{{ url_for('login') }}">Login</a>
+    </nav>
+
+    <main>
+        <h2>Latest Cybersecurity News</h2>
+
+        <input type="search" id="search"
+               placeholder="Search cybersecurity news..."
+               aria-label="Search news">
+
+        <div class="news-container">
+            {% for article in articles %}
+            <div class="news-card"
+                 data-category="{{ article.category }}">
+                <h3>
+                    <a href="{{ url_for('article', article_id=article.id) }}">
+                        {{ article.title }}
+                    </a>
+                </h3>
+                <p>{{ article.content | truncate(180) }}</p>
+                <small>{{ article.category }}</small>
+            </div>
+            {% endfor %}
+        </div>
+
+        <p id="no-results" hidden>No matching news found.</p>
+    </main>
+
+    <footer>
+        <p>© 2026 CyberNews | Cybersecurity Awareness</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

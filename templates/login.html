@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | CyberNews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #102b50;
+            color: white;
+            text-align: center;
+            padding: 50px 15px;
+        }
+        .login-box {
+            background: #205b91;
+            padding: 30px;
+            max-width: 350px;
+            margin: auto;
+            border-radius: 12px;
+        }
+        input, button {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 6px;
+            border: none;
+        }
+        button {
+            background: #63d7ff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        a { color: white; }
+        .error { color: #ffe1a8; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>CyberNews Login</h1>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('login') }}">
+            <input type="text" name="username"
+                   placeholder="Username" required>
+
+            <input type="password" name="password"
+                   placeholder="Password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </div>
+</body>
+</html>

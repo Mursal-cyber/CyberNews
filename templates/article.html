@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }} | CyberNews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #102b50;
+            color: white;
+            margin: 0;
+        }
+        header, footer {
+            background: #173f70;
+            padding: 25px;
+            text-align: center;
+        }
+        main {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 25px;
+            background: #205b91;
+            border-radius: 12px;
+        }
+        a { color: #85e4ff; }
+        p { line-height: 1.7; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CyberNews</h1>
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </header>
+
+    <main>
+        <h2>{{ article.title }}</h2>
+        <p><strong>Category:</strong> {{ article.category }}</p>
+        <p>{{ article.content }}</p>
+    </main>
+
+    <footer>
+        <p>© 2026 CyberNews</p>
+    </footer>
+</body>
+</html>

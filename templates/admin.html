@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | CyberNews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #102b50;
+            color: white;
+            margin: 0;
+        }
+        header {
+            background: #173f70;
+            padding: 25px;
+            text-align: center;
+        }
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        section {
+            background: #205b91;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+        }
+        input, select, textarea, button {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 6px;
+        }
+        textarea { min-height: 120px; }
+        button {
+            background: #63d7ff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .delete-button {
+            background: #ffb4b4;
+        }
+        .article {
+            border-bottom: 1px solid #8cb4d4;
+            padding: 15px 0;
+        }
+        a { color: #85e4ff; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CyberNews Admin Dashboard</h1>
+        <a href="{{ url_for('home') }}">View Website</a>
+
+        <form method="POST" action="{{ url_for('logout') }}">
+            <button type="submit">Logout</button>
+        </form>
+    </header>
+
+    <main>
+        <section>
+            <h2>Add New Article</h2>
+
+            <form method="POST" action="{{ url_for('add_article') }}">
+                <input type="text" name="title"
+                       placeholder="Article Title" required maxlength="200">
+
+                <select name="category" required>
+                    <option value="Ransomware">Ransomware</option>
+                    <option value="Data Breaches">Data Breaches</option>
+                    <option value="Vulnerabilities">Vulnerabilities</option>
+                    <option value="Phishing">Phishing</option>
+                </select>
+
+                <textarea name="content"
+                          placeholder="Write article content here..."
+                          required></textarea>
+
+                <button type="submit">Add Article</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Manage Articles</h2>
+
+            {% for article in articles %}
+                <div class="article">
+                    <h3>{{ article.title }}</h3>
+                    <p>Category: {{ article.category }}</p>
+
+                    <a href="{{ url_for('article', article_id=article.id) }}">
+                        Read Article
+                    </a>
+
+                    <form method="POST"
+                          action="{{ url_for('delete_article', article_id=article.id) }}"
+                          onsubmit="return confirm('Delete this article?');">
+                        <button class="delete-button" type="submit">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            {% else %}
+                <p>No articles available.</p>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>
