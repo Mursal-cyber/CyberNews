@@ -169,6 +169,17 @@ with app.app_context():
         ])
         db.session.commit()
 
-
+@app.route("/api/articles")
+def api_articles():
+    articles = Article.query.order_by(Article.created_at.desc()).all()
+    return [
+        {
+            "id": article.id,
+            "title": article.title,
+            "category": article.category,
+            "content": article.content
+        }
+        for article in articles
+    ]
 if __name__ == "__main__":
     app.run(debug=True)
